@@ -56,13 +56,24 @@ namespace Game
         // Provide stubs so we don't get console errors. If you actually want to use
         // any of these functions, be sure to remove the empty definition here.
         [ConsoleFunction]
-        public static void onDatablockObjectReceived() {}
+        public static void onDatablockObjectReceived()
+        {
+        }
+
         [ConsoleFunction]
-        public static void onGhostAlwaysObjectReceived() {}
+        public static void onGhostAlwaysObjectReceived()
+        {
+        }
+
         [ConsoleFunction]
-        public static void onGhostAlwaysStarted() {}
+        public static void onGhostAlwaysStarted()
+        {
+        }
+
         [ConsoleFunction]
-        public static void updateTSShapeLoadProgress() {}
+        public static void updateTSShapeLoadProgress()
+        {
+        }
 
         //-----------------------------------------------------------------------------
         // Called when the engine is shutting down.

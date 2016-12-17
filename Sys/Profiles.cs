@@ -8,7 +8,7 @@ namespace Game.Sys
         public static void Init()
         {
             // Set font cache path if it doesn't already exist.
-            if(string.IsNullOrEmpty(Globals.GetString("Gui::fontCacheDirectory")))
+            if (string.IsNullOrEmpty(Globals.GetString("Gui::fontCacheDirectory")))
             {
                 Globals.SetString("Gui::fontCacheDirectory", Global.expandFilename("sys/fonts"));
             }
@@ -19,7 +19,7 @@ namespace Game.Sys
             // ----------------------------------------------------------------------------
             if (!Global.isObject("GuiDefaultProfile"))
             {
-                GuiControlProfile guiDefaultProfile = new GuiControlProfile ()
+                GuiControlProfile guiDefaultProfile = new GuiControlProfile()
                 {
                     Name = "GuiDefaultProfile",
                     Tab = false,
@@ -36,7 +36,7 @@ namespace Game.Sys
 
                     // border color
                     Border = 0,
-                    BorderColor   = new ColorI(100, 100, 100),
+                    BorderColor = new ColorI(100, 100, 100),
                     BorderColorHL = new ColorI(50, 50, 50, 50),
                     BorderColorNA = new ColorI(75, 75, 75),
 
@@ -44,11 +44,10 @@ namespace Game.Sys
                     FontType = "Arial",
                     FontSize = 14,
                     FontCharset = GuiFontCharset.ANSI,
-
                     FontColor = ColorI.BLACK,
                     FontColorHL = ColorI.BLACK,
                     FontColorNA = ColorI.BLACK,
-                    FontColorSEL= ColorI.WHITE,
+                    FontColorSEL = ColorI.WHITE,
 
                     // bitmap information
                     Bitmap = "",
@@ -83,7 +82,6 @@ namespace Game.Sys
                     FontType = "Arial",
                     FontSize = 14,
                     FontColor = ColorI.BLACK,
-
                     Category = "Core"
                 };
                 tooltipProfile.registerObject();
@@ -94,7 +92,6 @@ namespace Game.Sys
                 GuiControlProfile windowProfile = new GuiControlProfile()
                 {
                     Name = "GuiWindowProfile",
-                    
                     Opaque = false,
                     Border = 2,
                     FillColor = new ColorI(242, 241, 240),
@@ -119,7 +116,6 @@ namespace Game.Sys
                 GuiControlProfile textEditProfile = new GuiControlProfile()
                 {
                     Name = "GuiTextEditProfile",
-                    
                     Opaque = true,
                     Bitmap = "./images/textEdit",
                     HasBitmapArray = true,
@@ -146,7 +142,6 @@ namespace Game.Sys
                 GuiControlProfile scrollProfile = new GuiControlProfile()
                 {
                     Name = "GuiScrollProfile",
-
                     Opaque = true,
                     FillColor = ColorI.WHITE,
                     FontColor = ColorI.BLACK,
@@ -164,7 +159,6 @@ namespace Game.Sys
                 GuiControlProfile overlayProfile = new GuiControlProfile()
                 {
                     Name = "GuiOverlayProfile",
-
                     Opaque = true,
                     FillColor = ColorI.BLACK,
                     FontColor = ColorI.BLACK,

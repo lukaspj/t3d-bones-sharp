@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using Torque3D;
 
 namespace Game.Sys
 {
@@ -28,6 +29,9 @@ namespace Game.Sys
             // Initialization of the various subsystems requires some of the preferences
             // to be loaded... so do that first.
             Config.Init();
+
+            Canvas.Init();
+            Cursor.Init();
         }
     }
 }
