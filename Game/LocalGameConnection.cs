@@ -4,8 +4,8 @@ using Torque3D.Util;
 
 namespace Game.Game
 {
-    [ConsoleClass(pConsoleName: "GameConnection")]
-    public class LocalGameConnection : GameConnection
+    [ConsoleClass]
+    public class GameConnection : Torque3D.GameConnection
     {
         //-----------------------------------------------------------------------------
         // Called when all datablocks have been transmitted.
@@ -15,9 +15,8 @@ namespace Game.Game
             //GameConnection client = Sim.FindObject<GameConnection>(pClient);
 
             // Create a camera for the client.
-            Camera theCamera = new Camera()
+            Camera theCamera = new Camera("TheCamera")
             {
-                Name = "TheCamera",
                 DataBlock = Sim.FindObjectByName<CameraData>("Observer")
             };
             theCamera.registerObject();
@@ -48,7 +47,7 @@ namespace Game.Game
         }
 
         // Called when all datablocks from above have been transmitted.
-        public void onDataBlocksDone()
+        public void onDataBlocksDone(string sequence)
         {
             //closeSplashWindow();
             GuiCanvas canvas = Sim.FindObjectByName<GuiCanvas>("Canvas");

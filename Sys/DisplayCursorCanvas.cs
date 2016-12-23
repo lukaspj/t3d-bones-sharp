@@ -18,7 +18,7 @@ namespace Game.Sys
 
         //---------------------------------------------------------------------------------------------
         // checkCursor
-        // The checkCursor method iterates through all the root controls on the canvas checking each
+        // The checkCursor method iterates through all the root controls on the GameCanvas checking each
         // ones noCursor property. If the noCursor property exists as anything other than false or an
         // empty string on every control, the cursor will be hidden.
         //---------------------------------------------------------------------------------------------

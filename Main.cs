@@ -1,97 +1,113 @@
-﻿using Torque3D;
+﻿using System.Reflection;
+using Torque3D;
 using Torque3D.Engine;
+using Path = System.IO.Path;
 
 namespace Game
 {
-    public class Main
-    {
-        [ScriptEntryPoint]
-        public static void main()
-        {
-            // Enable console logging, which creates the file console.log each time you run
-            // the engine.
-            Global.setLogMode(2);
+   public class Main
+   {
+      [ScriptEntryPoint]
+      public static void main()
+      {
+         // --- Boilerplate C#-specific setup. Normally Torque uses the main.cs file to set these variables, here we have to do it ourselves.
+         string CSDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location).Replace('\\', '/');
+         Global.setMainDotCsDir(CSDir);
+         Global.setCurrentDirectory(CSDir);
+         // ---
 
-            // Display a splash window immediately to improve app responsiveness before
-            // engine is initialized and main window created
-            Global.displaySplashWindow("splash.bmp");
+         // Enable console logging, which creates the file console.log each time you run
+         // the engine.
+         Global.setLogMode(6);
 
-            //-----------------------------------------------------------------------------
-            // Load up scripts to initialise subsystems.
-            //exec("sys/main.cs");
+         /*Global.eval(@"echo(""------CONSOLE CLASSES BEGIN------"");
+dumpConsoleClasses(false, true);
+echo(""------CONSOLE CLASSES END------"");
+echo(""------CONSOLE FUNCTIONS BEGIN------"");
+dumpConsoleFunctions(false, true);
+echo(""------CONSOLE FUNCTIONS END------"");
+quit();");*/
 
-            // The canvas needs to be initialized before any gui scripts are run since
-            // some of the controls assume that the canvas exists at load time.
-            createCanvas("T3Dbones");
+         // Display a splash window immediately to improve app responsiveness before
+         // engine is initialized and main window created
+         Global.displaySplashWindow("splash.bmp");
 
-            // Start rendering and stuff.
-            initRenderManager();
-            initLightingSystems("Basic Lighting");
+         //-----------------------------------------------------------------------------
+         // Load up scripts to initialise subsystems.
+         Sys.Main.Init();
 
-            // Start audio.
-            sfxStartup();
+         // The GameCanvas needs to be initialized before any gui scripts are run since
+         // some of the controls assume that the GameCanvas exists at load time.
+         Sys.Canvas.createCanvas("T#bones");
 
-            //-----------------------------------------------------------------------------
-            // Load console.
-            //exec("lib/console/main.cs");
+         // Start rendering and stuff.
+         Sys.RenderManager.initRenderManager();
+         Sys.Lighting.initLightingSystems("Basic Lighting");
 
-            // Load up game code.
-            //exec("game/main.cs");
+         // Start audio.
+         Sys.Audio.sfxStartup();
 
-            // Create a local game server and connect to it.
-            SimGroup serverGroup = new SimGroup("ServerGroup");
-            serverGroup.registerObject();
-            GameConnection serverConnection = new GameConnection();
-            serverConnection.Name = "ServerConnection";
-            serverConnection.registerObject();
+         //-----------------------------------------------------------------------------
+         // Load console.
+         Lib.Console.Main.Init();
 
-            // This calls GameConnection::onConnect.
-            serverConnection.connectLocal();
+         // Load up game code.
+         Game.Main.Init();
 
-            // Start game-specific scripts.
-            //onStart();
-        }
+         // Create a local game server and connect to it.
+         SimGroup serverGroup = new SimGroup("ServerGroup");
+         serverGroup.registerObject();
+         GameConnection serverConnection = new GameConnection();
+         serverConnection.Name = "ServerConnection";
+         serverConnection.registerObject();
+
+         // This calls GameConnection::onConnect.
+         serverConnection.connectLocal();
+
+         // Start game-specific scripts.
+         Game.Main.onStart();
+      }
 
 
-        // Provide stubs so we don't get console errors. If you actually want to use
-        // any of these functions, be sure to remove the empty definition here.
-        [ConsoleFunction]
-        public static void onDatablockObjectReceived()
-        {
-        }
+      // Provide stubs so we don't get console errors. If you actually want to use
+      // any of these functions, be sure to remove the empty definition here.
+      [ConsoleFunction]
+      public static void onDataBlockObjectReceived(string index, string total)
+      {
+      }
 
-        [ConsoleFunction]
-        public static void onGhostAlwaysObjectReceived()
-        {
-        }
+      [ConsoleFunction]
+      public static void onGhostAlwaysObjectReceived()
+      {
+      }
 
-        [ConsoleFunction]
-        public static void onGhostAlwaysStarted()
-        {
-        }
+      [ConsoleFunction]
+      public static void onGhostAlwaysStarted(string ghostCount)
+      {
+      }
 
-        [ConsoleFunction]
-        public static void updateTSShapeLoadProgress()
-        {
-        }
+      [ConsoleFunction]
+      public static void updateTSShapeLoadProgress()
+      {
+      }
 
-        //-----------------------------------------------------------------------------
-        // Called when the engine is shutting down.
-        [ConsoleFunction]
-        public static void onExit()
-        {
-            GameConnection serverConnection = Sim.FindObjectByName<GameConnection>("ServerConnection");
-            SimGroup serverGroup = Sim.FindObjectByName<SimGroup>("ServerGroup");
+      //-----------------------------------------------------------------------------
+      // Called when the engine is shutting down.
+      [ConsoleFunction]
+      public static void onExit()
+      {
+         GameConnection serverConnection = Sim.FindObjectByName<GameConnection>("ServerConnection");
+         SimGroup serverGroup = Sim.FindObjectByName<SimGroup>("ServerGroup");
 
-            // Clean up ghosts.
-            serverConnection.delete();
+         // Clean up ghosts.
+         serverConnection.delete();
 
-            // Clean up game objects and so on.
-            //onEnd();
+         // Clean up game objects and so on.
+         Game.Main.onEnd();
 
-            // Delete server-side objects and datablocks.
-            serverGroup.delete();
-            //deleteDataBlocks();
-        }
-    }
+         // Delete server-side objects and datablocks.
+         serverGroup.delete();
+         Global.deleteDataBlocks();
+      }
+   }
 }

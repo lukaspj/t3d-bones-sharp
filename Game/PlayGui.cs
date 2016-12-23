@@ -11,7 +11,7 @@ namespace Game.Game
         {
             Name = "PlayGui";
             IsContainer = true;
-            Profile = Sim.FindObject<GuiControlProfile>("GuiContentProfile");
+            Profile = Sim.FindObject<GuiControlProfile>("GuiDefaultProfile");
             HorizSizing = GuiHorizontalSizing.ResizeRight;
             VertSizing = GuiVerticalSizing.ResizeBottom;
             Position = new Point2I(0, 0);

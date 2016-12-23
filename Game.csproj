@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\</OutputPath>
+    <OutputPath>..\..\..\..\game\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -47,15 +47,33 @@
     <Compile Include="Game\LocalGameConnection.cs" />
     <Compile Include="Game\Main.cs" />
     <Compile Include="Game\PlayGui.cs" />
+    <Compile Include="Lib\Console\Console.cs" />
+    <Compile Include="Lib\Console\ConsoleDlg.cs" />
+    <Compile Include="Lib\Console\ConsoleEntry.cs" />
+    <Compile Include="Lib\Console\Main.cs" />
+    <Compile Include="Lib\Console\Profiles.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sys\Audio.cs" />
     <Compile Include="Sys\Canvas.cs" />
     <Compile Include="Sys\Config.cs" />
     <Compile Include="Sys\Cursor.cs" />
     <Compile Include="Sys\DisplayCursorCanvas.cs" />
+    <Compile Include="Sys\GfxData\Water.cs" />
+    <Compile Include="Sys\GfxData\Clouds.cs" />
+    <Compile Include="Sys\GfxData\ScatterSky.cs" />
+    <Compile Include="Sys\GfxData\TerrainBlock.cs" />
+    <Compile Include="Sys\GfxData\Shaders.cs" />
+    <Compile Include="Sys\GfxData\CommonMaterialData.cs" />
+    <Compile Include="Sys\Lighting.cs" />
+    <Compile Include="Sys\LightingSystems\Basic\ShadowFilter.cs" />
+    <Compile Include="Sys\LightingSystems\Basic\Basic.cs" />
+    <Compile Include="Sys\LightingSystems\Shadowmaps\Clouds.cs" />
     <Compile Include="Sys\Main.cs" />
+    <Compile Include="Sys\PostFx.cs" />
     <Compile Include="Sys\Profiles.cs" />
+    <Compile Include="Sys\RenderManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -65,6 +83,9 @@
       <Project>{fb8a4db9-43de-4a97-b0bb-da33066ca713}</Project>
       <Name>Torque3D</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Sys\LightingSystems\Advanced\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
